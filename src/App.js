@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import CountriesScreen from "./components/screen/CountriesScreen";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { CountriesContextProvider } from "./components/services/countries.context";
+import CountryDetails from "./components/screen/CountryDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{height:"100vh",backgroundColor:"white"}}>    
+      <Router>
+        <Routes>
+          <Route path="/" exact element={
+            <CountriesContextProvider>
+              <CountriesScreen/>
+            </CountriesContextProvider>}
+          />
+          <Route path="/details/:id" exact element={
+            <CountriesContextProvider>
+              <CountryDetails/>
+            </CountriesContextProvider>}
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }
